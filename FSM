@@ -1,0 +1,65 @@
+module projectmodule (input logic clk , reset , output logic [6:0]y );
+logic [3:0]x ;
+projcounter proj (clk,reset,x);
+always_ff @(posedge clk, posedge reset) begin
+case(x)
+0000 : assign y = 7'b111_1110 ;
+0001 : assign y = 7'b011_0000 ; 
+0011 : assign y = 7'b110_1101 ;
+0010 : assign y = 7'b111_1001 ; 
+0110 : assign y = 7'b011_0011 ;
+0111 : assign y = 7'b101_1011 ;
+0101 : assign y = 7'b101_1111 ;
+0100 : assign y = 7'b111_0000 ; 
+1100 : assign y = 7'b111_1111 ;
+1101 : assign y = 7'b111_0011 ;
+1111 : assign y = 7'b111_0111 ;
+1110 : assign y = 7'b001_1111 ; 
+1010 : assign y = 7'b100_1110 ;
+1011 : assign y = 7'b011_1101 ;
+1001 : assign y = 7'b100_1111 ;
+1000 : assign y = 7'b100_0111 ;
+default assign y = 7'b111_1110 ;
+endcase 
+end
+endmodule
+
+module projecttest();
+logic clk,reset;  
+logic a ;
+projectmodule fun (clk,reset,a ) ;
+always begin
+clk=0; #50;
+clk=~clk; #50;
+end
+initial begin 
+reset=1; #100;  
+reset=0;
+if (a !== 7'b111_1110 ) $display(" failed."); #100;
+if (a !== 7'b011_0000 ) $display(" failed."); #100;
+if (a !== 7'b110_1101 ) $display(" failed."); #100;
+if (a !== 7'b111_1001 ) $display(" failed."); #100;
+if (a !== 7'b011_0011 ) $display(" failed."); #100;
+if (a !== 7'b101_1011 ) $display(" failed."); #100;
+if (a !== 7'b101_1111 ) $display(" failed."); #100;
+if (a !== 7'b111_0000 ) $display(" failed."); #100;
+if (a !== 7'b111_1111 ) $display(" failed."); #100;
+if (a !== 7'b111_0011 ) $display(" failed."); #100;
+if (a !== 7'b111_0111 ) $display(" failed."); #100;
+if (a !== 7'b001_1111 ) $display(" failed."); #100;
+if (a !== 7'b100_1110 ) $display(" failed."); #100;
+if (a !== 7'b011_1101 ) $display(" failed."); #100;
+if (a !== 7'b100_1111 ) $display(" failed."); #100;
+if (a !== 7'b100_0111 ) $display(" failed."); #100;
+if (a !== 7'b111_1110 ) $display(" failed."); #100;
+if (a !== 7'b011_0000 ) $display(" failed."); #100;
+if (a !== 7'b110_1101 ) $display(" failed."); #100;
+if (a !== 7'b111_1001 ) $display(" failed."); #100;
+if (a !== 7'b011_0011 ) $display(" failed."); #100;
+if (a !== 7'b101_1011 ) $display(" failed."); #100;
+if (a !== 7'b101_1111 ) $display(" failed."); #100;
+if (a !== 7'b111_0000 ) $display(" failed."); #100;
+if (a !== 7'b111_1111 ) $display(" failed."); #100;
+if (a !== 7'b111_0011 ) $display(" failed."); #100;
+end
+endmodule
